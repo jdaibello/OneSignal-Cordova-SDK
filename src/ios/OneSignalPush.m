@@ -631,4 +631,31 @@ static Class delegateClass = nil;
     successCallback(command.callbackId, @{@"value" : @(locationShared)});
 }
 
+/**
+ * Live Activities
+ */
+
+- (void)enterLiveActivity(CDVInvokedUrlCommand*)command {
+    enterLiveActivityCallbackId = command.callbackId;
+
+    NSString *activityId = command.arguments[0];
+    NSString *token = command.arguments[1];
+    
+    [OneSignal enterLiveActivity:activityId withToken:token withSuccess:^(NSDictionary* results){
+        successCallback(enterLiveActivityCallbackId, results);
+    } withFailure:^(NSError *error) {
+        failureCallback(enterLiveActivityCallbackId, error.userInfo);
+    }];
+}
+
+- (void)exitLiveActivity(CDVInvokedUrlCommand*)command {
+    exitLiveActivityCallbackId = command.callbackId;
+
+    [OneSignal exitLiveActivity:activityId withSuccess:^(NSDictionary* results){
+        successCallback(exitLiveActivityCallbackId, results);
+    } withFailure:^(NSError *error) {
+        failureCallback(exitLiveActivityCallbackId, error.userInfo);
+    }];
+}
+
 @end
