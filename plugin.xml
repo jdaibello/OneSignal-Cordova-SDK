@@ -43,9 +43,11 @@
       <uses-permission android:name="$PACKAGE_NAME.permission.RECEIVE_ADM_MESSAGE" />
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <activity android:name="com.onesignal.NotificationOpenedActivityHMS" android:exported="true" tools:node="merge"/>
       <amazon:enable-feature android:name="com.amazon.device.messaging" android:required="false" xmlns:amazon="http://schemas.amazon.com/apk/res/android" />
       <service android:name="com.onesignal.ADMMessageHandler" android:exported="false" />
       <receiver
+        android:exported="true"
         android:name="com.onesignal.ADMMessageHandler$Receiver"
         android:permission="com.amazon.device.messaging.permission.SEND" >
         <intent-filter>
@@ -54,6 +56,8 @@
           <category android:name="$PACKAGE_NAME" />
         </intent-filter>
       </receiver>
+      <receiver android:name="com.onesignal.BootUpReceiver" android:exported="true" tools:node="merge" />
+      <receiver android:name="com.onesignal.UpgradeReceiver" android:exported="true" tools:node="merge" />
     </config-file>
 
     <source-file src="src/android/com/plugin/gcm/OneSignalPush.java" target-dir="src/com/plugin/gcm/" />
