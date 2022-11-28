@@ -26,7 +26,7 @@ public class OneSignalController {
   /**
    * Misc
    */
-  public boolean getIds(CallbackContext callbackContext) {
+  public static boolean getIds(CallbackContext callbackContext) {
     // Returns an `OSDeviceState` object with the current immediate device state info
     OSDeviceState device = OneSignal.getDeviceState();
     //Get the OneSignal Push Player Id
