@@ -28,8 +28,6 @@ public class OneSignalController {
         @Override
         public void onOSSubscriptionChanged(OSSubscriptionStateChanges stateChanges) {
           if (stateChanges.getTo().getUserId() != null || stateChanges.getFrom().getPushToken() != null) {
-            Log.i(TAG, "getIds (Async) - userId: " + stateChanges.getTo().getUserId());
-            Log.i(TAG, "getPushTokens (Async) - pushToken: " + stateChanges.getTo().getPushToken());
             executeGetIdCallback(callbackContext, stateChanges.getTo().getUserId(),
                 stateChanges.getTo().getPushToken());
             OneSignal.removeSubscriptionObserver(this);
@@ -37,8 +35,6 @@ public class OneSignalController {
         }
       });
     } else {
-      Log.i(TAG, "getIds - userId: " + userId);
-      Log.i(TAG, "getPushTokens - pushToken: " + pushToken);
       executeGetIdCallback(callbackContext, userId, pushToken);
     }
 
